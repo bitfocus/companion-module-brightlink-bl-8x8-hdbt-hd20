@@ -1,28 +1,34 @@
 {
 	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
 	"type": "connection",
-	"id": "your-module-name",
-	"name": "your-module-name",
-	"shortname": "module-shortname",
-	"description": "A short one line description of your module",
-	"version": "0.0.0",
+	"id": "brightlink-bl-8x8-hdbt-hd20",
+	"name": "brightlink-bl-8x8-hdbt-hd20",
+	"shortname": "brightlink",
+	"description": "Control the BrightLink BL-8X8-HDBT-HD20 HDMI Matrix switcher over IP",
+	"version": "1.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-brightlink-bl-8x8-hdbt-hd20",
+	"bugs": "https://github.com/bitfocus/companion-module-brightlink-bl-8x8-hdbt-hd20/issues",
 	"maintainers": [
 		{
-			"name": "Your name",
-			"email": "Your email"
+			"name": "Nathan Butler",
+			"email": "nbutlerimax@gmail.com"
 		}
 	],
+	"legacyIds": ["brightlink-bl_8x8_hdbt_hd20"],
 	"runtime": {
 		"type": "node22",
 		"api": "nodejs-ipc",
 		"apiVersion": "0.0.0",
-		"entrypoint": "../src/main.js"
+		"entrypoint": "../index.js"
 	},
-	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
-	"keywords": []
+	"manufacturer": "BrightLink",
+	"products": [
+		"BL-8X8-HDBT-HD20"
+	],
+	"keywords": [
+		"BrightLink",
+		"HDMI",
+		"Matrix"
+	]
 }

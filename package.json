@@ -1,27 +1,32 @@
 {
-	"name": "your-module-name",
-	"version": "0.1.0",
-	"main": "src/main.js",
+	"name": "brightlink-bl-8x8-hdbt-hd20",
+	"version": "1.0.0",
+	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"format": "prettier -w .",
-		"package": "companion-module-build"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"package": "companion-module-build",
+		"lint:raw": "eslint",
+		"lint": "yarn lint:raw ."
 	},
-	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-your-module-name.git"
+		"url": "git+https://github.com/bitfocus/companion-module-brightlink-bl-8x8-hdbt-hd20"
 	},
+	"license": "MIT",
 	"engines": {
-		"node": "^22.20",
-		"yarn": "^4"
+		"node": ">=22"
 	},
 	"dependencies": {
-		"@companion-module/base": "~2.0.4"
+		"@companion-module/base": "~2.0.4",
+		"got": "^14.4.7"
 	},
 	"devDependencies": {
 		"@companion-module/tools": "^3.1.0",
-		"prettier": "^3.8.3"
+		"eslint": "^9.35.0",
+		"prettier": "^3.8.3",
+		"typescript-eslint": "^8.42.0"
 	},
 	"prettier": "@companion-module/tools/.prettierrc.json",
-	"packageManager": "yarn@4.17.0"
+	"packageManager": "yarn@4.18.0"
 }
