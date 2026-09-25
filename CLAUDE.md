@@ -34,11 +34,11 @@ This module targets `@companion-module/base` 2.x. Most Companion modules and the
 | `await context.parseVariablesInString(v)` | Companion resolves variables and expressions **before** the callback; option values arrive as plain numbers/strings |
 | upgrade script options are raw values | options are wrapped `{ value, isExpression }` |
 
-`upgrade.js` is an **index-stable array**: Companion records how far each install has been upgraded. Never delete or reorder entries — replace obsolete ones with `EmptyUpgradeScript` (slots 0 and 1 are already no-ops left from the generic-http fork this module started as).
+`src/upgrade.js` is an **index-stable array**: Companion records how far each install has been upgraded. Never delete or reorder entries — replace obsolete ones with `EmptyUpgradeScript` (slots 0 and 1 are already no-ops left from the generic-http fork this module started as).
 
 ## Architecture
 
-`index.js` holds the instance class and the poll loop; everything else is a pure builder that takes the instance (`self`) and returns definitions.
+`src/index.js` holds the instance class and the poll loop; everything else is a pure builder that takes the instance (`self`) and returns definitions.
 
 **Device constraints drive the whole design.** The matrix never pushes changes and never acknowledges a command (`POST /video.set` returns empty 200 regardless). So: `initPolling()` runs `pollMatrixStatus()` on a timer, and `sendCommands()` re-polls immediately after every write. `device.js` isolates the two HTTP calls; note the `all_dat.get` cache-buster concatenates onto the path with **no `?`**.
 
