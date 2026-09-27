@@ -1,7 +1,7 @@
 // Parsing for the BrightLink BL-8X8-HDBT-HD20 `all_dat.get` response.
 //
-// The device replies with exactly 160 `;`-separated segments in a fixed order and
-// no trailing separator. Offsets and field meanings follow the API spec at
+// The device replies with exactly 160 `;`-separated segments in a fixed order. Real
+// hardware ends the body with a trailing `;`, which the parser strips. Offsets and field meanings follow the API spec at
 // https://github.com/ntbutler87/BLMatrixServer/blob/main/API_SPEC.md
 
 export const PORT_COUNT = 8
@@ -197,7 +197,7 @@ export const parseStatusString = (statusString) => {
 		throw new Error('empty response from device')
 	}
 
-	const segments = statusString.split(';')
+	const segments = statusString.trimEnd().replace(/;$/,'').split(';')
 	if (segments.length !== SEGMENT_COUNT) {
 		throw new Error(`expected ${SEGMENT_COUNT} segments, got ${segments.length}`)
 	}
