@@ -37,6 +37,7 @@ export function getPresetDefinitions(self) {
 	const addSceneSave = section('scene_save', 'Scene save')
 	const addSelectInput = section('routing_select_input', 'Routing - select input')
 	const addTakeOutput = section('routing_take_output', 'Routing - take to output')
+	const addCrosspoint = section('routing_crosspoint', 'Routing - direct input to output')
 	const addStatusInput = section('status_inputs', 'Status - inputs')
 	const addStatusOutput = section('status_outputs', 'Status - outputs')
 	const addMacro = section('macro', 'Macro')
@@ -109,6 +110,27 @@ export function getPresetDefinitions(self) {
 		)
 	}
 
+	// One-press routing, grouped by output so each output's eight sources sit together.
+	for (const output of status.HDMI_OUT) {
+		for (const input of status.HDMI_IN) {
+			addCrosspoint(
+				`route_${input.id}_${output.id}`,
+				button(
+					`Route input ${input.id} to output ${output.id}`,
+					`${input.label}\n>\n${output.label}`,
+					[{ actionId: 'mapIOpath', options: { inputPort: input.id, outputPort: output.id } }],
+					[
+						{
+							feedbackId: 'input_output',
+							options: { input: input.id, output: output.id },
+							style: { color: BLACK, bgcolor: GREEN },
+						},
+					],
+				),
+			)
+		}
+	}
+
 	for (const input of status.HDMI_IN) {
 		addStatusInput(
 			`status_input_${input.id}`,
@@ -151,12 +173,35 @@ export function getPresetDefinitions(self) {
 	}
 	addMacro(
 		'macro_1_1',
-		button('Maps in1 to out1, in2 to out2, etc.', '1-1 IO map', [{ actionId: 'mapIOpathMulti', options: oneToOne }]),
+		button(
+			'Maps in1 to out1, in2 to out2, etc.',
+			'1-1 IO map',
+			[{ actionId: 'mapIOpathMulti', options: oneToOne }],
+			[
+				{
+					feedbackId: 'routing_matches',
+					options: oneToOne,
+					style: { color: BLACK, bgcolor: GREEN },
+				},
+			],
+		),
 	)
 
 	addMacro(
 		'get_status',
-		button('Refresh status from the matrix', 'Refresh\nstatus', [{ actionId: 'getStatus', options: {} }]),
+		button(
+			'Refresh status from the matrix',
+			'Refresh\nstatus',
+			[{ actionId: 'getStatus', options: {} }],
+			[
+				{
+					feedbackId: 'connected',
+					options: {},
+					isInverted: true,
+					style: { color: WHITE, bgcolor: RED },
+				},
+			],
+		),
 	)
 
 	// Scenes and ports come from the device, so a section can legitimately be empty

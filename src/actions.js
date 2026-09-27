@@ -203,6 +203,11 @@ export function getActionDefinitions(self) {
 			}
 			await self.sendCommands(commands)
 		},
+		// Captures the live routing, so a map can be set up by hand and then stored.
+		learn: () => {
+			if (!self.connected) return undefined
+			return Object.fromEntries(self.matrixStatus.HDMI_OUT.map((output) => [output.id, output.input]))
+		},
 	}
 
 	return actions

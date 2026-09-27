@@ -4,6 +4,9 @@ import { AUDIO_SOURCES, EDID_MODES, PORT_COUNT } from './matrix.js'
 // on the matrix rather than HDMI_IN1/HDMI_OUT1 placeholders.
 export const portChoices = (ports) => ports.map((port) => ({ id: port.id, label: `${port.id}: ${port.label}` }))
 
+// Input ids start at 1, so 0 is free to mean "this output is not checked".
+export const ANY_INPUT = 0
+
 export const FIELDS = {
 	// `id` is overridable because existing actions already store their values under
 	// specific option ids that must keep working.
@@ -21,6 +24,16 @@ export const FIELDS = {
 		id,
 		default: 1,
 		choices: portChoices(self.matrixStatus.HDMI_OUT),
+	}),
+
+	// Option ids are the output number, matching "Map IO path - multi", so a preset
+	// can hand the same options object to both the action and the feedback.
+	RouteMatchSelect: (self, output) => ({
+		type: 'dropdown',
+		label: `Output ${output.id} (${output.label}) source`,
+		id: String(output.id),
+		default: output.id,
+		choices: [{ id: ANY_INPUT, label: 'Any (not checked)' }, ...portChoices(self.matrixStatus.HDMI_IN)],
 	}),
 
 	SceneSelect: (self, id = 'sceneNumber', label = 'Scene') => ({
@@ -117,6 +130,18 @@ export const FIELDS = {
 		choices: [
 			{ id: 0, label: 'Disabled' },
 			{ id: 1, label: 'Enabled' },
+		],
+	},
+
+	// Keys are the HDMI_OUT port fields the feedback reads.
+	AudioOutput: {
+		type: 'dropdown',
+		label: 'Audio output',
+		id: 'audioOutput',
+		default: 'iis',
+		choices: [
+			{ id: 'iis', label: 'Analog / I²S' },
+			{ id: 'spdif', label: 'S/PDIF' },
 		],
 	},
 

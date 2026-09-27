@@ -11,6 +11,8 @@ See [HELP.md](./companion/HELP.md) for the full action, feedback and variable re
 * Audio — input source select, output analog/I²S and S/PDIF enables
 * EDID — assign to inputs from presets, user slots, or a connected display; copy a display's EDID into a user slot
 * Port renaming
+* Routing feedbacks — a single route, or the whole 8-output map at once, as a stand-in for the "active scene" the device cannot report
+* Audio, EDID and connection-state feedbacks
 * Signal-presence feedbacks for inputs and outputs, using the fields the hardware actually reports reliably
 * Variables for routing, port names, scene names and connection state
 

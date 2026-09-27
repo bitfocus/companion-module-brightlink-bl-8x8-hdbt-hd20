@@ -18,7 +18,7 @@ The matrix routes 8 HDMI inputs to 8 HDMI outputs and 8 HDBaseT outputs. **HDMI 
 **Routing**
 
 * **Map IO path** — route one input to one output.
-* **Map IO path - multi** — set all 8 outputs at once.
+* **Map IO path - multi** — set all 8 outputs at once. Press **Learn** on the action to fill it in from the matrix's current routing.
 * **Select input** / **Route selected input to output** — two-step X/Y panel. Press an input, then press each output it should feed. Pressing the selected input again clears the selection.
 
 **Scenes**
@@ -44,9 +44,25 @@ The matrix routes 8 HDMI inputs to 8 HDMI outputs and 8 HDBaseT outputs. **HDMI 
 
 ### Feedbacks
 
+**Routing**
+
+* **Routing matches (all outputs)** — true when every output matches the input chosen for it. Set an output to **Any (not checked)** to leave it out. Supports **Learn**.
+* **Specified input is routed to specified output** — true when one output is fed by one input. Supports **Learn**.
+* **Input is routed to any output** — true when at least one output is fed by the input. Use it as a "source in use" indicator.
 * **Specified input is the selected input** — for X/Y panels.
 * **Selected input is routed to output** — for X/Y panels.
-* **Specified input is routed to specified output** — fixed route indicator.
+
+> **Showing which routing is live.** The matrix does not report which scene is active, and it cannot read back what a stored scene contains. To light the button for the routing that is live, put **Map IO path - multi** and **Routing matches (all outputs)** on the same button with the same eight inputs. Setting both is quickest with **Learn**: route the matrix by hand, then press Learn on the action and on the feedback. The **1-1 IO map** preset is already set up this way.
+
+**Audio and EDID**
+
+* **Input audio source is** — true when the input's audio is set to mute, HDMI embedded or analog.
+* **Output audio output is enabled** — true when the output's analog/I²S or S/PDIF output is on.
+* **Input EDID assignment is** — true when the input uses the chosen EDID source and slot.
+
+**Connection**
+
+* **Matrix is connected** — true while status polls succeed. Invert it to warn when the matrix is offline. The other feedbacks keep showing the last state they read while the matrix is offline.
 * **Input has a source connected** — true when the input reports `sig=1`.
 * **Output has a display connected** — true when the output reports `hpd=1` or reads back an EDID other than `Unplug`. Can be tested against the HDMI half, the HDBT half, or either.
 
@@ -62,7 +78,7 @@ Selection: `selected_input`, `selected_input_name`.
 
 ### Presets
 
-Scene recall, scene save, X/Y routing panel (select input / take to output), input and output signal-presence indicators, a 1-to-1 map macro, and a status refresh button. Preset labels follow the port names configured on the matrix.
+Scene recall, scene save, X/Y routing panel (select input / take to output), a one-press button for every input and output pair that lights when that route is live, input and output signal-presence indicators, a 1-to-1 map macro that lights when the matrix is mapped 1-to-1, and a status refresh button that turns red when the matrix is offline. Preset labels follow the port names configured on the matrix.
 
 ### Not supported
 
