@@ -1,6 +1,6 @@
 {
 	"name": "brightlink-bl-8x8-hdbt-hd20",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"main": "src/index.js",
 	"type": "module",
 	"scripts": {
